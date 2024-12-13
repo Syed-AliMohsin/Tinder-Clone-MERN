@@ -7,6 +7,13 @@ export const updateProfile = async (req, res) => {
   try {
     const { image, ...otherData } = req.body;
 
+    if (!otherData.name || !otherData.age || !otherData.gender || !otherData.genderPreference) {
+      return res.status(400).json({
+        success: false,
+        message: "Name, age, gender and genderPreference can not be empty!",
+      });
+    }
+
     let updatedData = otherData;
 
     if (image) {
